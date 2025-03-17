@@ -1,5 +1,6 @@
 import math
 from utils import delimiter
+from insumos_calculator import cal_insumos
 
 largura_rua = 2.5
 largura_fileira_plantas = 1
@@ -53,13 +54,13 @@ def area_calculator():
     num_fileiras = calc_quantidade_fileiras(
         largura, largura_rua, largura_fileira_plantas
     )
+    area_util = calc_area_util_de_plantio(area, num_fileiras, largura_rua, comprimento)
     print(
         f"A área do terreno é de {area} m², que equivale a {area_total_hectares} hectares"
     )
     print(f"Numero de fileiras: {num_fileiras}")
-    print(
-        f"Area util de plantio: {calc_area_util_de_plantio(area, num_fileiras, largura_rua, comprimento)}"
-    )
+    print(f"Area util de plantio: {area_util}")
+    print(cal_insumos(area_util))
     print("\n\n")
 
 
