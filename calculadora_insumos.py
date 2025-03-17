@@ -1,9 +1,3 @@
-# - Calcário: 300g
-# - Fertilizantes: 150g
-# - Palhada: 5kg
-# - Água: 500ml
-
-
 def cal_insumos(area_util):
     espaco_entre_mudas = 0.8
     espaco_fileiras = 3.5

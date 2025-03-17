@@ -3,12 +3,46 @@
 # Atualização de dados numa posição qualquer do vetor;
 # Deleção de dados do vetor de dados;
 # Ter a opção “sair do programa”;
-from utils import delimiter
+from utils import delimiter, limpar
+from calculadora_area import (
+    show_calculadora_area_description,
+    get_largura,
+    get_comprimento,
+    calc_area_total,
+    calc_hectares,
+    calc_quantidade_fileiras,
+    calc_area_util_de_plantio,
+)
+from calculadora_insumos import cal_insumos
+from selecionar_cultura import selecionar_cultura
 
 
 def menu():
+    running = True
+    largura = 0
+    comprimento = 0
+    area = 0
+    area_total_hectares = 0
+    cultura_selecionada = 0
+    num_fileiras = 0
+    area_util = 0
+    insumos = {}
 
-    while True:
+    while running:
+        print(f"Cultura selecionada: {cultura_selecionada}\n")
+        print("Terreno:")
+        print(
+            f"""
+            Largura ({largura}m)
+             _________
+            |         |   
+            |    A    | Comprimento ({comprimento}m)
+            |_________|
+            """
+        )
+        print(f"Area: {area}m²\n")
+        print(f"Hectares: {area_total_hectares}\n")
+
         print(delimiter)
         print("Escolha uma opção:\n")
         print("1. Entrada de dados")
@@ -21,38 +55,52 @@ def menu():
 
         match opcao:
             case 1:
-                while True:
-                    print(delimiter)
-                    print("Selecione a cultura desejada:\n")
-                    print("1. Café")
-                    print("2. Soja")
-                    print("3. Voltar ao menu principal")
-                    print(delimiter)
-                    opcao_cultura = int(
-                        input("\nDigite o número da cultura desejada: ")
-                    )
+                limpar()
+                show_calculadora_area_description()
+                largura = get_largura()
+                comprimento = get_comprimento()
 
-                    match opcao_cultura:
-                        case 1:
-                            print("Café :")
-                            print("Figura geométrica para cálculo da área: Retângulo")
-                            print("Insumos por m²:")
-                            print("Calcário dolomítico: 0,3 kg")
-                            print("Superfosfato simples: 0,2 kg")
-                            print("Fertilizantes: 0,1 kg")
-                            print("Agua: 0,5 L")
-                        case 2:
-                            print("Soja selecionada")
-                        case 3:
-                            print("Voltar ao menu principal")
-                            break
-                        case _:
-                            print("Opção inválida! Informe uma opção válida de 1 a 2.")
+                area = calc_area_total(largura, comprimento)
+                area_total_hectares = calc_hectares(area)
+
+                print(delimiter)
+                print(
+                    f"A área do terreno é de {area} m², que equivale a {area_total_hectares} hectares"
+                )
+                print("\n")
+                input("Pressione Enter para continuar...")
+
+                limpar()
+                cultura_selecionada = selecionar_cultura()
+
+                if cultura_selecionada == 1:
+                    limpar()
+                    print("Calculando insumos para café...")
+                    num_fileiras = calc_quantidade_fileiras(largura)
+                    area_util = calc_area_util_de_plantio(
+                        area, num_fileiras, comprimento
+                    )
+                    insumos = cal_insumos(area_util)
+                    print("\n")
+                    input("Pressione Enter para continuar...")
+                    limpar()
+                elif cultura_selecionada == 2:
+                    limpar()
+                    print("Calcular insumos para soja...")
+
             case 2:
-                print("Saída de dados")
+                limpar()
+                print(f"Numero de fileiras: {num_fileiras}")
+                print(f"Area util de plantio: {area_util}")
+                print(insumos)
+                print("\n")
+                input("Pressione Enter para continuar...")
+                limpar()
             case 3:
+                limpar()
                 print("Atualização de dados")
             case 4:
+                limpar()
                 print("Deleção de dados")
             case 5:
                 print("Saindo do programa...")
