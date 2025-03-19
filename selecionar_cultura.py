@@ -5,6 +5,7 @@ def selecionar_cultura():
     opcao_cultura = 0
 
     while True:
+        limpar()
         print(delimiter)
         print("Selecione a cultura desejada:\n")
         print("1. Café")
@@ -24,6 +25,8 @@ def selecionar_cultura():
                 limpar()
                 break
             case _:
-                print("Opção inválida! Informe uma opção válida de 1 a 2.")
+                print("\nOpção inválida! Informe uma opção válida de 1 a 2.")
+                input("\nPressione Enter para continuar...")
+                limpar()
 
     return opcao_cultura

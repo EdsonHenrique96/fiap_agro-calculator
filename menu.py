@@ -12,6 +12,7 @@ from calculadora_area import (
     calc_hectares,
     calc_quantidade_fileiras,
     calc_area_util_de_plantio,
+    get_densidade,
 )
 from calculadora_insumos import cal_insumos
 from selecionar_cultura import selecionar_cultura
@@ -27,6 +28,7 @@ def menu():
     cultura_selecionada = 0
     num_fileiras = 0
     area_util = 0
+    densidade = 0
     insumos = {}
 
     while running:
@@ -57,21 +59,21 @@ def menu():
         match opcao:
             case 1:
                 limpar()
+                print(delimiter)
                 show_calculadora_area_description()
                 largura = get_largura()
                 comprimento = get_comprimento()
 
                 area = calc_area_total(largura, comprimento)
                 area_total_hectares = calc_hectares(area)
-
                 print(delimiter)
                 print(
                     f"A área do terreno é de {area} m², que equivale a {area_total_hectares} hectares"
                 )
                 print("\n")
                 input("Pressione Enter para continuar...")
-
                 limpar()
+
                 cultura_selecionada = selecionar_cultura()
 
                 if cultura_selecionada == 1:
@@ -87,7 +89,11 @@ def menu():
                     limpar()
                 elif cultura_selecionada == 2:
                     limpar()
+                    densidade = get_densidade()
                     print("Calcular insumos para soja...")
+                    print("\n")
+                    input("Pressione Enter para continuar...")
+                    limpar()
 
             case 2:
                 limpar()
@@ -113,4 +119,6 @@ def menu():
                 print("Saindo do programa...")
                 break
             case _:
-                print("Opção inválida! Informe uma opção válida de 1 a 5.")
+                print("\nOpção inválida! Informe uma opção válida de 1 a 5.")
+                input("\nPressione Enter para continuar...")
+                limpar()
