@@ -1,3 +1,6 @@
+from utils import formatar_numero
+
+
 def cal_insumos(area_util):
     espaco_entre_mudas = 0.8
     espaco_fileiras = 3.5
@@ -15,11 +18,11 @@ def cal_insumos(area_util):
     mudas_total = area_util / mudas_por_m2
 
     return {
-        "calcario": calcario_total,
-        "fertilizantes": fertilizantes_total,
-        "agua": agua_total,
-        "palhada": palhada_total,
-        "mudas": mudas_total,
+        "Calcario": formatar_numero(calcario_total),
+        "Fertilizantes": formatar_numero(fertilizantes_total),
+        "Agua": formatar_numero(agua_total),
+        "Palhada": formatar_numero(palhada_total),
+        "Mudas": formatar_numero(mudas_total),
     }
 
 

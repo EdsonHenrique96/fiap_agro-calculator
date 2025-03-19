@@ -15,6 +15,7 @@ from calculadora_area import (
 )
 from calculadora_insumos import cal_insumos
 from selecionar_cultura import selecionar_cultura
+from utils import formatar_numero
 
 
 def menu():
@@ -33,10 +34,10 @@ def menu():
         print("Terreno:")
         print(
             f"""
-            Largura ({largura}m)
+            Largura ({formatar_numero(largura)}m)
              _________
             |         |   
-            |    A    | Comprimento ({comprimento}m)
+            |    A    | Comprimento ({formatar_numero(comprimento)}m)
             |_________|
             """
         )
@@ -90,9 +91,15 @@ def menu():
 
             case 2:
                 limpar()
-                print(f"Numero de fileiras: {num_fileiras}")
-                print(f"Area util de plantio: {area_util}")
-                print(insumos)
+                print(delimiter)
+                print("Informações do terreno:\n")
+                print(f"Numero de fileiras: {formatar_numero(num_fileiras)}")
+                print(f"Area útil de plantio: {formatar_numero(area_util)} m²")
+                print(delimiter)
+                print("Insumos:\n")
+                for key, value in insumos.items():
+                    print(f"{key}: {value}")
+                print(delimiter)
                 print("\n")
                 input("Pressione Enter para continuar...")
                 limpar()
