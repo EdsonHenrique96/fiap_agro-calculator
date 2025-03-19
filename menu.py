@@ -90,6 +90,10 @@ def menu():
                 elif cultura_selecionada == 2:
                     limpar()
                     densidade = get_densidade()
+                    num_fileiras = calc_quantidade_fileiras(largura, cultura="soja")
+                    area_util = calc_area_util_de_plantio(
+                        area, num_fileiras, comprimento, cultura="soja"
+                    )
                     print("Calcular insumos para soja...")
                     print("\n")
                     input("Pressione Enter para continuar...")

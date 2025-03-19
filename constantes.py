@@ -9,3 +9,10 @@ soja = {
     "largura_fileira_plantas": 0.5,
     "desidade": [20, 25, 30, 35, 40],
 }
+
+
+def get_cultura(cultura: str):
+    if cultura == "cafe":
+        return cafe
+    else:
+        return soja
