@@ -6,7 +6,7 @@ cafe = {
 
 soja = {
     "largura_rua": 0.5,
-    "largura_fileira_plantas": 0.5,
+    "largura_fileira_plantas": 1,
     "desidade": [20, 25, 30, 35, 40],
 }
 

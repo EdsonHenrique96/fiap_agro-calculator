@@ -6,7 +6,6 @@ from constantes import get_cultura
 # Em casos que o numero de ruas é quebrado, arredondar para baixo
 def calc_quantidade_fileiras(largura_terreno: float, cultura: str = "cafe"):
     cultura = get_cultura(cultura)
-    print(cultura)
     largura_fileira_total = cultura["largura_rua"] + cultura["largura_fileira_plantas"]
     return math.floor(largura_terreno / largura_fileira_total)
 

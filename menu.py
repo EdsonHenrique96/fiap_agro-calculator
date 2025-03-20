@@ -14,7 +14,7 @@ from calculadora_area import (
     calc_area_util_de_plantio,
     get_densidade,
 )
-from calculadora_insumos import cal_insumos
+from calculadora_insumos import cal_insumos_cafe, cal_insumos_soja
 from selecionar_cultura import selecionar_cultura
 from utils import formatar_numero
 
@@ -54,7 +54,7 @@ def menu():
         print("4. Deleção de dados")
         print("5. Sair do programa")
         print(delimiter)
-        opcao = int(input("Digite o número da opção desejada: "))
+        opcao = int(input("Digite o número da opção desejada: ") or 0)
 
         match opcao:
             case 1:
@@ -83,17 +83,20 @@ def menu():
                     area_util = calc_area_util_de_plantio(
                         area, num_fileiras, comprimento
                     )
-                    insumos = cal_insumos(area_util)
+                    insumos = cal_insumos_cafe(area_util=area_util, area_total=area)
                     print("\n")
                     input("Pressione Enter para continuar...")
                     limpar()
                 elif cultura_selecionada == 2:
                     limpar()
                     densidade = get_densidade()
-                    num_fileiras = calc_quantidade_fileiras(largura, cultura="soja")
+                    num_fileiras = calc_quantidade_fileiras(
+                        largura_terreno=largura, cultura="soja"
+                    )
                     area_util = calc_area_util_de_plantio(
                         area, num_fileiras, comprimento, cultura="soja"
                     )
+                    insumos = cal_insumos_soja(area_util=area_util, densidade=densidade)
                     print("Calcular insumos para soja...")
                     print("\n")
                     input("Pressione Enter para continuar...")
