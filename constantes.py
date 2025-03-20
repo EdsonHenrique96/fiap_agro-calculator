@@ -10,6 +10,8 @@ soja = {
     "desidade": [20, 25, 30, 35, 40],
 }
 
+culturas = ["Café", "Soja"]
+
 
 def get_cultura(cultura: str):
     if cultura == "cafe":

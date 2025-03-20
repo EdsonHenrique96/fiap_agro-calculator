@@ -31,9 +31,9 @@ def calc_area_total(largura, comprimento):
     return area_total
 
 
-def show_calculadora_area_description():
+def show_cadastro_fazenda_descricao():
     print(delimiter)
-    print("Calculadora de área (A)\n")
+    print("Cadastro da fazenda\n")
     print(
         """
         Largura (Metros)
@@ -44,16 +44,6 @@ def show_calculadora_area_description():
     """
     )
     print(delimiter)
-
-
-def get_largura():
-    largura = float(input("Digite a largura do terreno em metros: "))
-    return largura
-
-
-def get_comprimento():
-    comprimento = float(input("Digite o comprimento do terreno em metros: "))
-    return comprimento
 
 
 def get_densidade():

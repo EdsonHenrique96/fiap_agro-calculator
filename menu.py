@@ -5,24 +5,24 @@
 # Ter a opção “sair do programa”;
 from utils import delimiter, limpar
 from calculadora_area import (
-    show_calculadora_area_description,
-    get_largura,
-    get_comprimento,
+    show_cadastro_fazenda_descricao,
     calc_area_total,
     calc_hectares,
     calc_quantidade_fileiras,
     calc_area_util_de_plantio,
     get_densidade,
 )
+from form_dados_cadastrais import form_dados_cadastrais
+from form_dimensoes import form_dimensoes
 from calculadora_insumos import cal_insumos_cafe, cal_insumos_soja
 from selecionar_cultura import selecionar_cultura
 from utils import formatar_numero
+from constantes import culturas
+from atualizar_dados import menu_atualizar_dados
 
 
 def menu():
     running = True
-    largura = 0
-    comprimento = 0
     area = 0
     area_total_hectares = 0
     cultura_selecionada = 0
@@ -31,15 +31,21 @@ def menu():
     densidade = 0
     insumos = {}
 
+    # nome, rua, numero, bairro, cidade, estado, cep, proprietario, telefone, email
+    fazenda = []
+
+    # largura, comprimento
+    dimensoes = [0, 0]
+
     while running:
-        print(f"Cultura selecionada: {cultura_selecionada}\n")
+        print(f"Cultura selecionada: {culturas[cultura_selecionada-1]}\n")
         print("Terreno:")
         print(
             f"""
-            Largura ({formatar_numero(largura)}m)
+            Largura ({formatar_numero(dimensoes[0])}m)
              _________
             |         |   
-            |    A    | Comprimento ({formatar_numero(comprimento)}m)
+            |    A    | Comprimento ({formatar_numero(dimensoes[1])}m)
             |_________|
             """
         )
@@ -60,11 +66,11 @@ def menu():
             case 1:
                 limpar()
                 print(delimiter)
-                show_calculadora_area_description()
-                largura = get_largura()
-                comprimento = get_comprimento()
+                show_cadastro_fazenda_descricao()
+                form_dados_cadastrais(fazenda)
+                form_dimensoes(dimensoes)
 
-                area = calc_area_total(largura, comprimento)
+                area = calc_area_total(dimensoes[0], dimensoes[1])
                 area_total_hectares = calc_hectares(area)
                 print(delimiter)
                 print(
@@ -79,9 +85,9 @@ def menu():
                 if cultura_selecionada == 1:
                     limpar()
                     print("Calculando insumos para café...")
-                    num_fileiras = calc_quantidade_fileiras(largura)
+                    num_fileiras = calc_quantidade_fileiras(dimensoes[0])
                     area_util = calc_area_util_de_plantio(
-                        area, num_fileiras, comprimento
+                        area, num_fileiras, dimensoes[1]
                     )
                     insumos = cal_insumos_cafe(area_util=area_util, area_total=area)
                     print("\n")
@@ -90,20 +96,25 @@ def menu():
                 elif cultura_selecionada == 2:
                     limpar()
                     densidade = get_densidade()
+                    limpar()
+                    print("Calcular insumos para soja...")
                     num_fileiras = calc_quantidade_fileiras(
-                        largura_terreno=largura, cultura="soja"
+                        largura_terreno=dimensoes[0], cultura="soja"
                     )
                     area_util = calc_area_util_de_plantio(
-                        area, num_fileiras, comprimento, cultura="soja"
+                        area, num_fileiras, dimensoes[1], cultura="soja"
                     )
                     insumos = cal_insumos_soja(area_util=area_util, densidade=densidade)
-                    print("Calcular insumos para soja...")
                     print("\n")
                     input("Pressione Enter para continuar...")
                     limpar()
 
             case 2:
                 limpar()
+                print(delimiter)
+                print("Informações da fazenda:\n")
+                for item in fazenda:
+                    print(f"{item[0]}: {item[1]}")
                 print(delimiter)
                 print("Informações do terreno:\n")
                 print(f"Numero de fileiras: {formatar_numero(num_fileiras)}")
@@ -117,8 +128,8 @@ def menu():
                 input("Pressione Enter para continuar...")
                 limpar()
             case 3:
+                menu_atualizar_dados(fazenda=fazenda, dimensoes=dimensoes)
                 limpar()
-                print("Atualização de dados")
             case 4:
                 limpar()
                 print("Deleção de dados")
