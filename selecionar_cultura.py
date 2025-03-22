@@ -2,7 +2,7 @@ from utils import delimiter, limpar
 
 
 def selecionar_cultura():
-    opcao_cultura = 0
+    opcao_cultura = ""
 
     while True:
         limpar()
@@ -10,7 +10,6 @@ def selecionar_cultura():
         print("Selecione a cultura desejada:\n")
         print("1. Café")
         print("2. Soja")
-        print("3. Voltar ao menu principal")
         print(delimiter)
         opcao_cultura = int(input("\nDigite o número da cultura desejada: "))
 
@@ -20,9 +19,6 @@ def selecionar_cultura():
                 break
             case 2:
                 print("Soja selecionada")
-                break
-            case 3:
-                limpar()
                 break
             case _:
                 print("\nOpção inválida! Informe uma opção válida de 1 a 2.")

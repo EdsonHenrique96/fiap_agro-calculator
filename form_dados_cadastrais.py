@@ -11,7 +11,17 @@ def get_rua():
 
 
 def get_numero():
-    return input("Digite o número: ")
+    numero = ""
+
+    while True:
+        numero = input("Digite o número: ")
+
+        if not numero.isdecimal():
+            print("\n***Digite um numero válido (Exemplo: 99)***\n")
+        else:
+            break
+
+    return int(numero)
 
 
 def get_bairro():
@@ -27,7 +37,23 @@ def get_estado():
 
 
 def get_cep():
-    return input("Digite o CEP: ")
+    cep = ""
+
+    while True:
+        cep = input("Digite o CEP: ")
+
+        if len(cep) != 8:
+            print("\n***Digitel um CEP válido (8 digitos)***\n")
+        elif len(cep) <= 0:
+            print("\n***O CEP não pode ser vazio***\n")
+        elif not cep.isdecimal():
+            print(
+                "\n***Valor inválido, deve conter somente números, Exemplo: 99999999***\n"
+            )
+        else:
+            break
+
+    return int(cep)
 
 
 def get_proprietario():
@@ -35,7 +61,23 @@ def get_proprietario():
 
 
 def get_telefone():
-    return input("Digite o telefone: ")
+    telefone = ""
+
+    while True:
+        telefone = input("Digite o telefone: ")
+
+        if len(telefone) < 10 or len(telefone) > 11:
+            print("\n***Digitel um telefone válido (10 a 11 digitos)***\n")
+        elif len(telefone) <= 0:
+            print("\n***O Telefone não pode ser vazio***\n")
+        elif not telefone.isdecimal():
+            print(
+                "\n***Valor inválido, deve conter somente números, Exemplo: 11999999999***\n"
+            )
+        else:
+            break
+
+    return int(telefone)
 
 
 def get_email():

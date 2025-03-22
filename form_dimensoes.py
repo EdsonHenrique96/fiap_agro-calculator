@@ -5,12 +5,10 @@ def get_largura():
     while True:
         largura = input("Digite a largura do terreno em metros: ")
 
-        if not largura.isnumeric():
+        if not largura.isdecimal():
             print("\n***Valor inválido, digite um valor númerico!***\n")
-            continue
         elif float(largura) <= 0:
             print("\n***Valor deve ser maior que zero!***\n")
-            continue
         else:
             break
 
@@ -21,12 +19,10 @@ def get_comprimento():
     while True:
         comprimento = input("Digite o comprimento do terreno em metros: ")
 
-        if not comprimento.isnumeric():
+        if not comprimento.isdecimal():
             print("\n***Valor inválido, digite um valor númerico!***\n")
-            continue
         elif float(comprimento) <= 0:
             print("\n***Valor deve ser maior que zero!***\n")
-            continue
         else:
             break
 

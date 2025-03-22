@@ -21,7 +21,7 @@ def atualizar_dimensoes_terreno(dimensoes: list):
         print("\nDimensões do terreno: \n")
         print(f"1. Largura - {dimensoes[0]}")
         print(f"2. Comprimento - {dimensoes[1]}")
-        print(f"3. Voltar ao menu principal")
+        print(f"0. Voltar ao menu principal")
         print(delimiter)
 
         opcao = int(input("\nDigite o número da opção desejada: "))
@@ -31,7 +31,7 @@ def atualizar_dimensoes_terreno(dimensoes: list):
                 dimensoes[0] = get_largura()
             case 2:
                 dimensoes[1] = get_comprimento()
-            case 3:
+            case 0:
                 limpar()
                 break
             case _:
@@ -49,7 +49,7 @@ def menu_atualizar_dados_cadastrais(fazenda: list):
         print("\nDados cadastrais da fazenda: \n")
         for i, item in enumerate(fazenda, start=1):
             print(f"{i}. {item[0]} - {item[1]}")
-        print("11. Voltar ao menu principal")
+        print("0. Voltar ao menu principal")
         print(delimiter)
 
         opcao = int(input("\nDigite o número do dado que deseja atualizar: "))
@@ -75,7 +75,7 @@ def menu_atualizar_dados_cadastrais(fazenda: list):
                 fazenda[4][1] = get_telefone()
             case 10:
                 fazenda[5][1] = get_email()
-            case 11:
+            case 0:
                 limpar()
                 break
             case _:
@@ -93,7 +93,7 @@ def menu_atualizar_dados(fazenda: list, dimensoes: list):
         print("\nMenu de atualização de dados:\n")
         print("1. Dados cadastrais da fazenda")
         print("2. Dimensões do terreno")
-        print("3. Voltar ao menu principal")
+        print("0. Voltar ao menu principal")
         print(delimiter)
 
         opcao = int(input("\nDigite o número da opção desejada: "))
@@ -105,7 +105,7 @@ def menu_atualizar_dados(fazenda: list, dimensoes: list):
             case 2:
                 atualizar_dimensoes_terreno(dimensoes)
                 break
-            case 3:
+            case 0:
                 limpar()
                 break
             case _:
