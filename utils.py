@@ -13,3 +13,8 @@ def formatar_numero(valor: float) -> str:
         return f"{valor:.0f}".replace(".", ",")
 
     return f"{valor:.2f}".replace(".", ",")
+
+
+def confirmar_para_seguir():
+    input("\nPressione Enter para continuar...")
+    limpar()

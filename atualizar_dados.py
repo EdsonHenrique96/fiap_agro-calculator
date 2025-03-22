@@ -1,4 +1,4 @@
-from utils import delimiter, limpar
+from utils import delimiter, limpar, confirmar_para_seguir
 from form_dados_cadastrais import (
     get_nome,
     get_rua,
@@ -43,8 +43,7 @@ def atualizar_dimensoes_terreno(dimensoes: list):
                 break
             case _:
                 print("\nOpção inválida! Informe uma opção válida de 100 a 200.")
-                input("\nPressione Enter para continuar...")
-                limpar()
+                confirmar_para_seguir()
 
     return dimensoes
 
@@ -87,8 +86,7 @@ def menu_atualizar_dados_cadastrais(fazenda: list):
                 break
             case _:
                 print("\nOpção inválida! Informe uma opção válida de 1 a 11.")
-                input("\nPressione Enter para continuar...")
-                limpar()
+                confirmar_para_seguir()
 
     return fazenda
 
@@ -127,9 +125,7 @@ def menu_atualizar_dados(
                     )
                     insumos = cal_insumos_cafe(area_util=area_util, area_total=area)
 
-                    print("\n")
-                    input("Pressione Enter para continuar...")
-                    limpar()
+                    confirmar_para_seguir()
                 elif cultura == 2:
                     densidade = get_densidade()
                     print("\nAtualizando insumos para soja...")
@@ -141,17 +137,13 @@ def menu_atualizar_dados(
                     )
                     cal_insumos_soja(area_util=area_util, densidade=densidade)
 
-                    print("\n")
-                    input("Pressione Enter para continuar...")
-                    limpar()
-
+                    confirmar_para_seguir()
                 break
             case 3:
                 limpar()
                 break
             case _:
                 print("\nOpção inválida! Informe uma opção válida de 1 a 2.")
-                input("\nPressione Enter para continuar...")
-                limpar()
+                confirmar_para_seguir()
 
     return insumos

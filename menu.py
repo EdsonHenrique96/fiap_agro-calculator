@@ -3,7 +3,7 @@
 # Atualização de dados numa posição qualquer do vetor;
 # Deleção de dados do vetor de dados;
 # Ter a opção “sair do programa”;
-from utils import delimiter, limpar
+from utils import delimiter, limpar, confirmar_para_seguir
 from calculadora_area import (
     show_cadastro_fazenda_descricao,
     calc_area_total,
@@ -17,8 +17,19 @@ from form_dimensoes import form_dimensoes
 from calculadora_insumos import cal_insumos_cafe, cal_insumos_soja
 from selecionar_cultura import selecionar_cultura
 from utils import formatar_numero
-from constantes import culturas
+from constantes import mostrar_cultura_selecionada
 from atualizar_dados import menu_atualizar_dados
+from deletar_dados import deletar_dados
+
+
+def fazenda_esta_vazia(fazenda: list) -> bool:
+    if len(fazenda) <= 0:
+        limpar()
+        print("\n***Não existem dados, cadastre a fazenda!!***\n")
+        confirmar_para_seguir()
+        return True
+
+    return False
 
 
 def menu():
@@ -41,7 +52,9 @@ def menu():
         area = calc_area_total(dimensoes[0], dimensoes[1])
         area_total_hectares = calc_hectares(area)
 
-        print(f"Cultura selecionada: {culturas[cultura_selecionada-1]}\n")
+        print(
+            f"Cultura selecionada: {mostrar_cultura_selecionada(cultura_selecionada)}\n"
+        )
         print("Terreno:")
         print(
             f"""
@@ -52,8 +65,8 @@ def menu():
             |_________|
             """
         )
-        print(f"Area: {area}m²\n")
-        print(f"Hectares: {area_total_hectares}\n")
+        print(f"Area: {formatar_numero(area)}m²\n")
+        print(f"Hectares: {formatar_numero(area_total_hectares)}\n")
 
         print(delimiter)
         print("Escolha uma opção:\n")
@@ -80,9 +93,7 @@ def menu():
                 print(
                     f"A área do terreno é de {area} m², que equivale a {area_total_hectares} hectares"
                 )
-                print("\n")
-                input("Pressione Enter para continuar...")
-                limpar()
+                confirmar_para_seguir()
 
                 cultura_selecionada = selecionar_cultura()
 
@@ -94,9 +105,7 @@ def menu():
                         area, num_fileiras, dimensoes[1]
                     )
                     insumos = cal_insumos_cafe(area_util=area_util, area_total=area)
-                    print("\n")
-                    input("Pressione Enter para continuar...")
-                    limpar()
+                    confirmar_para_seguir()
                 elif cultura_selecionada == 2:
                     limpar()
                     densidade = get_densidade()
@@ -108,11 +117,12 @@ def menu():
                         area, num_fileiras, dimensoes[1], cultura="soja"
                     )
                     insumos = cal_insumos_soja(area_util=area_util, densidade=densidade)
-                    print("\n")
-                    input("Pressione Enter para continuar...")
-                    limpar()
+                    confirmar_para_seguir()
 
             case 2:
+                if fazenda_esta_vazia(fazenda):
+                    continue
+
                 limpar()
                 print(delimiter)
                 print("Informações da fazenda:\n")
@@ -127,10 +137,13 @@ def menu():
                 for key, value in insumos.items():
                     print(f"{key}: {value}")
                 print(delimiter)
-                print("\n")
-                input("Pressione Enter para continuar...")
-                limpar()
+                confirmar_para_seguir()
             case 3:
+                if fazenda_esta_vazia(fazenda):
+                    continue
+
+                limpar()
+
                 insumos = menu_atualizar_dados(
                     fazenda=fazenda,
                     dimensoes=dimensoes,
@@ -139,12 +152,23 @@ def menu():
                 )
                 limpar()
             case 4:
+                if fazenda_esta_vazia(fazenda):
+                    continue
+
                 limpar()
+
+                resultado = deletar_dados(
+                    dimensoes=dimensoes, fazenda=fazenda, cultura=cultura_selecionada
+                )
+
+                dimensoes = resultado["dimensoes"]
+                fazenda = resultado["fazenda"]
+                cultura_selecionada = resultado["cultura"]
+
                 print("Deleção de dados")
             case 5:
                 print("Saindo do programa...")
                 break
             case _:
                 print("\nOpção inválida! Informe uma opção válida de 1 a 5.")
-                input("\nPressione Enter para continuar...")
-                limpar()
+                confirmar_para_seguir()

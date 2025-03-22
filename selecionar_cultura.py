@@ -1,4 +1,4 @@
-from utils import delimiter, limpar
+from utils import delimiter, limpar, confirmar_para_seguir
 
 
 def selecionar_cultura():
@@ -11,7 +11,7 @@ def selecionar_cultura():
         print("1. Café")
         print("2. Soja")
         print(delimiter)
-        opcao_cultura = int(input("\nDigite o número da cultura desejada: "))
+        opcao_cultura = int(input("\nDigite o número da cultura desejada: ") or 0)
 
         match opcao_cultura:
             case 1:
@@ -22,7 +22,6 @@ def selecionar_cultura():
                 break
             case _:
                 print("\nOpção inválida! Informe uma opção válida de 1 a 2.")
-                input("\nPressione Enter para continuar...")
-                limpar()
+                confirmar_para_seguir()
 
     return opcao_cultura

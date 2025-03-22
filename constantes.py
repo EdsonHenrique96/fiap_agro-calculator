@@ -13,6 +13,10 @@ soja = {
 culturas = ["Café", "Soja"]
 
 
+def mostrar_cultura_selecionada(cultura_selecionada: int):
+    return culturas[cultura_selecionada - 1] if cultura_selecionada > 0 else ""
+
+
 def get_cultura(cultura: str):
     if cultura == "cafe":
         return cafe

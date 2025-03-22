@@ -1,5 +1,5 @@
 import math
-from utils import delimiter, limpar
+from utils import delimiter, limpar, confirmar_para_seguir
 from constantes import get_cultura
 
 
@@ -85,7 +85,6 @@ def get_densidade():
                 break
             case _:
                 print("\nOpção inválida! Informe uma opção válida de 1 a 5.")
-                input("\nPressione Enter para continuar...")
-                limpar()
+                confirmar_para_seguir()
 
     return densidade
