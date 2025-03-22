@@ -38,6 +38,9 @@ def menu():
     dimensoes = [0, 0]
 
     while running:
+        area = calc_area_total(dimensoes[0], dimensoes[1])
+        area_total_hectares = calc_hectares(area)
+
         print(f"Cultura selecionada: {culturas[cultura_selecionada-1]}\n")
         print("Terreno:")
         print(
@@ -72,6 +75,7 @@ def menu():
 
                 area = calc_area_total(dimensoes[0], dimensoes[1])
                 area_total_hectares = calc_hectares(area)
+
                 print(delimiter)
                 print(
                     f"A área do terreno é de {area} m², que equivale a {area_total_hectares} hectares"
@@ -96,7 +100,6 @@ def menu():
                 elif cultura_selecionada == 2:
                     limpar()
                     densidade = get_densidade()
-                    limpar()
                     print("Calcular insumos para soja...")
                     num_fileiras = calc_quantidade_fileiras(
                         largura_terreno=dimensoes[0], cultura="soja"
@@ -128,7 +131,12 @@ def menu():
                 input("Pressione Enter para continuar...")
                 limpar()
             case 3:
-                menu_atualizar_dados(fazenda=fazenda, dimensoes=dimensoes)
+                insumos = menu_atualizar_dados(
+                    fazenda=fazenda,
+                    dimensoes=dimensoes,
+                    cultura=cultura_selecionada,
+                    insumos=insumos,
+                )
                 limpar()
             case 4:
                 limpar()

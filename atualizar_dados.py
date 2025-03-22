@@ -11,6 +11,13 @@ from form_dados_cadastrais import (
     get_telefone,
     get_email,
 )
+from calculadora_area import (
+    calc_area_total,
+    calc_quantidade_fileiras,
+    calc_area_util_de_plantio,
+    get_densidade,
+)
+from calculadora_insumos import cal_insumos_cafe, cal_insumos_soja
 from form_dimensoes import get_comprimento, get_largura
 
 
@@ -21,17 +28,17 @@ def atualizar_dimensoes_terreno(dimensoes: list):
         print("\nDimensões do terreno: \n")
         print(f"1. Largura - {dimensoes[0]}")
         print(f"2. Comprimento - {dimensoes[1]}")
-        print(f"0. Voltar ao menu principal")
+        print("3. Voltar ao menu principal")
         print(delimiter)
 
-        opcao = int(input("\nDigite o número da opção desejada: "))
+        opcao = int(input("\nDigite o número da opção desejada: ") or 0)
 
         match opcao:
             case 1:
                 dimensoes[0] = get_largura()
             case 2:
                 dimensoes[1] = get_comprimento()
-            case 0:
+            case 3:
                 limpar()
                 break
             case _:
@@ -49,10 +56,10 @@ def menu_atualizar_dados_cadastrais(fazenda: list):
         print("\nDados cadastrais da fazenda: \n")
         for i, item in enumerate(fazenda, start=1):
             print(f"{i}. {item[0]} - {item[1]}")
-        print("0. Voltar ao menu principal")
+        print("11. Voltar ao menu principal")
         print(delimiter)
 
-        opcao = int(input("\nDigite o número do dado que deseja atualizar: "))
+        opcao = int(input("\nDigite o número do dado que deseja atualizar: ") or 0)
 
         match opcao:
             case 1:
@@ -75,28 +82,33 @@ def menu_atualizar_dados_cadastrais(fazenda: list):
                 fazenda[4][1] = get_telefone()
             case 10:
                 fazenda[5][1] = get_email()
-            case 0:
+            case 11:
                 limpar()
                 break
             case _:
-                print("\nOpção inválida! Informe uma opção válida de 1 a 7.")
+                print("\nOpção inválida! Informe uma opção válida de 1 a 11.")
                 input("\nPressione Enter para continuar...")
                 limpar()
 
     return fazenda
 
 
-def menu_atualizar_dados(fazenda: list, dimensoes: list):
+def menu_atualizar_dados(
+    fazenda: list,
+    dimensoes: list,
+    cultura: int,
+    insumos: dict,
+):
     while True:
         limpar()
         print(delimiter)
         print("\nMenu de atualização de dados:\n")
         print("1. Dados cadastrais da fazenda")
         print("2. Dimensões do terreno")
-        print("0. Voltar ao menu principal")
+        print("3. Voltar ao menu principal")
         print(delimiter)
 
-        opcao = int(input("\nDigite o número da opção desejada: "))
+        opcao = int(input("\nDigite o número da opção desejada: ") or 0)
 
         match opcao:
             case 1:
@@ -104,11 +116,42 @@ def menu_atualizar_dados(fazenda: list, dimensoes: list):
                 break
             case 2:
                 atualizar_dimensoes_terreno(dimensoes)
+
+                area = calc_area_total(dimensoes[0], dimensoes[1])
+
+                if cultura == 1:
+                    print("\nAtualizando insumos para café...")
+                    num_fileiras = calc_quantidade_fileiras(dimensoes[0])
+                    area_util = calc_area_util_de_plantio(
+                        area, num_fileiras, dimensoes[1]
+                    )
+                    insumos = cal_insumos_cafe(area_util=area_util, area_total=area)
+
+                    print("\n")
+                    input("Pressione Enter para continuar...")
+                    limpar()
+                elif cultura == 2:
+                    densidade = get_densidade()
+                    print("\nAtualizando insumos para soja...")
+                    num_fileiras = calc_quantidade_fileiras(
+                        largura_terreno=dimensoes[0], cultura="soja"
+                    )
+                    area_util = calc_area_util_de_plantio(
+                        area, num_fileiras, dimensoes[1], cultura="soja"
+                    )
+                    cal_insumos_soja(area_util=area_util, densidade=densidade)
+
+                    print("\n")
+                    input("Pressione Enter para continuar...")
+                    limpar()
+
                 break
-            case 0:
+            case 3:
                 limpar()
                 break
             case _:
-                print("\nOpção inválida! Informe uma opção válida de 1 a 3.")
+                print("\nOpção inválida! Informe uma opção válida de 1 a 2.")
                 input("\nPressione Enter para continuar...")
                 limpar()
+
+    return insumos

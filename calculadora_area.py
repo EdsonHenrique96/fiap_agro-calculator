@@ -19,6 +19,8 @@ def calc_area_util_de_plantio(
 
 
 def calc_hectares(area):
+    if area <= 0:
+        return 0
     return area / 10000
 
 
@@ -63,18 +65,23 @@ def get_densidade():
         match densidade:
             case 1:
                 densidade = 20
+                limpar()
                 break
             case 2:
                 densidade = 25
+                limpar()
                 break
             case 3:
                 densidade = 30
+                limpar()
                 break
             case 4:
                 densidade = 35
+                limpar()
                 break
             case 5:
                 densidade = 40
+                limpar()
                 break
             case _:
                 print("\nOpção inválida! Informe uma opção válida de 1 a 5.")
