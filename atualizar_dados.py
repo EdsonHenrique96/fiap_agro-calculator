@@ -64,23 +64,23 @@ def menu_atualizar_dados_cadastrais(fazenda: list):
             case 1:
                 fazenda[0][1] = get_nome()
             case 2:
-                fazenda[0][1] = get_rua()
+                fazenda[1][1] = get_rua()
             case 3:
-                fazenda[0][1] = get_numero()
+                fazenda[2][1] = get_numero()
             case 4:
-                fazenda[0][1] = get_bairro()
+                fazenda[3][1] = get_bairro()
             case 5:
-                fazenda[0][1] = get_cidade()
+                fazenda[4][1] = get_cidade()
             case 6:
-                fazenda[1][1] = get_estado()
+                fazenda[5][1] = get_estado()
             case 7:
-                fazenda[2][1] = get_cep()
+                fazenda[6][1] = get_cep()
             case 8:
-                fazenda[3][1] = get_proprietario()
+                fazenda[7][1] = get_proprietario()
             case 9:
-                fazenda[4][1] = get_telefone()
+                fazenda[8][1] = get_telefone()
             case 10:
-                fazenda[5][1] = get_email()
+                fazenda[9][1] = get_email()
             case 11:
                 limpar()
                 break
