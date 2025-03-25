@@ -5,16 +5,18 @@ from constantes import get_cultura
 
 # Em casos que o numero de ruas é quebrado, arredondar para baixo
 def calc_quantidade_fileiras(largura_terreno: float, cultura: str = "cafe"):
-    cultura = get_cultura(cultura)
-    largura_fileira_total = cultura["largura_rua"] + cultura["largura_fileira_plantas"]
+    cultura_dados = get_cultura(cultura)
+    largura_fileira_total = (
+        cultura_dados["largura_rua"] + cultura_dados["largura_fileira_plantas"]
+    )
     return math.floor(largura_terreno / largura_fileira_total)
 
 
 def calc_area_util_de_plantio(
     area_total, qtd_fileiras, comprimento_terreno, cultura: str = "cafe"
 ):
-    cultura = get_cultura(cultura)
-    total_area_rua = qtd_fileiras * cultura["largura_rua"] * comprimento_terreno
+    cultura_dados = get_cultura(cultura)
+    total_area_rua = qtd_fileiras * cultura_dados["largura_rua"] * comprimento_terreno
     return area_total - total_area_rua
 
 

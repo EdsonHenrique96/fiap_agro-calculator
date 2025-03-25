@@ -42,7 +42,7 @@ def atualizar_dimensoes_terreno(dimensoes: list):
                 limpar()
                 break
             case _:
-                print("\nOpção inválida! Informe uma opção válida de 100 a 200.")
+                print("\nOpção inválida! Informe uma opção válida de 1 a 3.")
                 confirmar_para_seguir()
 
     return dimensoes

@@ -86,14 +86,14 @@ def get_email():
 
 def form_dados_cadastrais(fazenda: list):
     print("Dados cadastrais:\n")
-    fazenda.append(["Nome", get_nome()]),
-    fazenda.append(["Rua", get_rua()]),
-    fazenda.append(["Numero", get_numero()]),
-    fazenda.append(["Bairro", get_bairro()]),
-    fazenda.append(["Cidade", get_cidade()]),
-    fazenda.append(["Estado", get_estado()]),
-    fazenda.append(["CEP", get_cep()]),
-    fazenda.append(["Proprietario", get_proprietario()]),
-    fazenda.append(["Telefone", get_telefone()]),
-    fazenda.append(["Email", get_email()]),
+    fazenda.append(["Nome", get_nome()])
+    fazenda.append(["Rua", get_rua()])
+    fazenda.append(["Numero", get_numero()])
+    fazenda.append(["Bairro", get_bairro()])
+    fazenda.append(["Cidade", get_cidade()])
+    fazenda.append(["Estado", get_estado()])
+    fazenda.append(["CEP", get_cep()])
+    fazenda.append(["Proprietario", get_proprietario()])
+    fazenda.append(["Telefone", get_telefone()])
+    fazenda.append(["Email", get_email()])
     print(delimiter)
